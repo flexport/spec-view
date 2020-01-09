@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+  "name": "Integration test helper extension",
+  "version": "0.0.1",
+  "background": {
+    "matches": "<all_urls>",
+    "scripts": ["networkMonitor.js"],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "instrumentTimersMonkeyPatch.js",
+        "instrumentTimers.js",
+        "contentConnect.js"
+      ],
+      "matches": ["<all_urls>"],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation"
+  ]
+}

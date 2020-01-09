@@ -1,0 +1,23 @@
+# TEAM: backend_infra
+# jQuery must come first, as it is a dependency for everything else
+- jquery.min.js
+# This must come right after jQuery, because it gives SpecView an isolated copy
+- jqueryNoConflict.js
+# This is used by the React property matcher
+- mingo.min.js
+# Library to split strings while respecting quotes and braces
+- split-string.js
+# Helpers we added to jQuery for use in SpecView
+- jqueryAdditions.js
+# Selector parser
+- parseSVCSS.js
+# Object ID shim
+- objectId.js
+# Main query workhorse code
+- query.js
+# Functions that are implemented as fetchers
+- fetcherFunctions.js
+# Meta test for the runtime
+- test.js
+# Helpers for waiting on network and timers
+- waiting.js
