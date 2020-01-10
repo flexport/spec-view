@@ -1,5 +1,4 @@
-# typed: true
-# TEAM: backend_infra
+require "active_support"
 
 module SpecView
   # Convenience methods available both to spec view classes and instances

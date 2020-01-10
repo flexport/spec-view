@@ -6,3 +6,5 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 gemspec
 
 gem "capybara", "~> 3.30"
+
+gem "activesupport", "~> 5.2"

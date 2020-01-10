@@ -1,5 +1,6 @@
-# typed: ignore
-# TEAM: backend_infra
+require_relative "spec_view_helpers"
+require_relative "spec_view_array"
+
 module SpecView
   WAIT_LOG_THRESHOLD_MS = 500
   # Base spec view, which defines the inherent mechanics behind spec views, as
