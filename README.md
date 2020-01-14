@@ -1,4 +1,4 @@
-# NOTE: THIS GEM IS IN A PRELIMINARY STATE AND IS NOT READ FOR HUMAN CONSUMPTION
+# NOTE: THIS GEM IS IN A PRELIMINARY STATE AND IS NOT READY FOR HUMAN CONSUMPTION
 
 As such, it has not been published yet. Work that remains to be done to get this ready for prime time:
 
