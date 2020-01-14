@@ -253,14 +253,6 @@ Waiting in integration tests is often a very important piece of making your test
 > view.settle
 ```
 
-If you need to process jobs, you should use the `wait_for_jobs` method.  It takes a block, and will do `settle` before and after the block runs
-
-```ruby
-> view.wait_for_jobs do
->   # Launch jobs here
-> end
-```
-
 For more information see the waiting section of the [API Docs](SpecViewAPIDocs.md).  If you encounter situations where `setle` doesn't wait long enough, please report it to the integration-test-infra slack channel, and we can help.  Sometimes it is necessary to use `wait_until_exists`, but you should prefer `settle`.
 
 ## Debugging queries
