@@ -46,8 +46,6 @@
     - [`wait_for_network`](#wait_for_network)
     - [`wait_for_view_activity`](#wait_for_view_activity)
     - [`wait_until_still`](#wait_until_still)
-    - [`wait_for_network_and_view`](#wait_for_network_and_view)
-    - [`wait_until_counter_increments(counter: String, by: number?, &block)`](#wait_until_counter_incrementscounter-string-by-number-block)
     - [`wait_until_visible`](#wait_until_visible)
   - [Delegated methods](#delegated-methods)
 - [SpecViewArray](#specviewarray)
@@ -435,44 +433,11 @@ Wait until no network requests are in flight.  Unless necessary, you should pref
 
 #### `wait_for_view_activity`
 
-Wait for javascript animations to finish, and for all short-term timers to resolve (except for those blacklisted in TestHook.js).  Unless necessary, you should prefer the `settle` method.
+Wait for javascript animations to finish, and for all short-term timers to resolve.  Unless necessary, you should prefer the `settle` method.
 
 #### `wait_until_still`
 
 Waits until the bounding rectangle of an element has not changed for `minimum_still_time`. This is useful when CSS animations makes interaction with an element unreliable.
-
-#### `wait_for_network_and_view`
-
-Deprecated, please call `settle`
-
-#### `wait_until_counter_increments(counter: String, by: number?, &block)`
-
-Run a block, and wait until a given test-hook counter has increased by a given amount (defaults to 1) before proceeding. The increase is measured from right before the block is run. For example, on the client, you could have:
-
-```js
-function assimilateNonBorg(borg, nonBorg) {
-  if (__TEST_ENV__) {
-    global.testHook.incrementCounter("ASSIMILATED");
-  }
-  borg.say("Resistance is futile.")
-  nonBorg.isBorg = true;
-}
-```
-
-Then, in your test, you could say:
-
-```ruby
-view.wait_until_counter_increments(counter: "ASSIMILATED", by: 2) do
-  view.borg_activation_button.click
-end
-```
-
-This will click the Borg activation button, then pause until `assimilateNonBorg` has been called twice.
-
-**Notes**:
-
-- *Always* guard any code that references `global.testHook` with an `if (__TEST_ENV__)`. If you do not, your code will work in integration tests, and fail elsewhere. `global.testHook` only exists in test builds.
-- Usually, you can measure the effects of UI actions more directly. Only use this when you want to specifically need to know that a certain piece of code has run, and it has no direct impact which is easy to wait for.
 
 #### `wait_until_visible`
 
