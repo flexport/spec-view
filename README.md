@@ -35,7 +35,6 @@ As such, it has not been published yet. Work that remains to be done to get this
   - [Limitations of react selectors](#limitations-of-react-selectors)
     - [Mixing react selectors with HTML DOM selectors](#mixing-react-selectors-with-html-dom-selectors)
     - [Views that reference react Components](#views-that-reference-react-components)
-- [Questions?](#questions)
 
 <!-- /MarkdownTOC -->
 
@@ -397,7 +396,3 @@ Consider the following SpecView components:
 If you get the result of `view.name_field`, the SpecView you get back represents the TextInput react component itself and _not_ any element inside it. However, there is no way to fetch react components from the browser directly. Therefore, if you try to use `view.name_field.style`, you will get an error; `style` is a Capybara element method, and no element can be fetched this way. Similarly, you cannot use `[]` indexing on a list of react components (but you can use `at`, as described above)
 
 However, there are several convenience methods that can directly interact with react fetchers. These are `click`, `send_keys`, `checked`?, `hover`, `value`, `toggle`, and `clear`. These will automatically search for an appropriate element inside the react component to interact with. You can also directly call `text` on a react component or list. This will fetch the concatenated text of all the component's child elements.
-
-## Questions?
-
-Ping @benbernard or @ada any time if you have more questions about SpecView
