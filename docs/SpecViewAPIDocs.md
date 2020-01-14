@@ -44,6 +44,8 @@
     - [`wait_until_gone`](#wait_until_gone)
     - [`wait_for(expected_errors: Array?, seconds_to_wait: number?, &block)`](#wait_forexpected_errors-array-seconds_to_wait-number-block)
     - [`wait_for_network`](#wait_for_network)
+    - [`default_ignored_network_patterns`](#default_ignored_network_patterns)
+    - [`default_ignored_timer_patterns`](#default_ignored_timer_patterns)
     - [`wait_for_view_activity`](#wait_for_view_activity)
     - [`wait_until_still`](#wait_until_still)
     - [`wait_until_visible`](#wait_until_visible)
@@ -430,6 +432,34 @@ Generic wait method. Waits until `block` returns `true`. Any error raised which 
 #### `wait_for_network`
 
 Wait until no network requests are in flight.  Unless necessary, you should prefer the `settle` method.
+
+#### `default_ignored_network_patterns`
+
+An array of regular expressions of the format `[pattern: string, flags?: string]`. If a network request's url matches any of these patterns, it will be ignored for the purposes of `wait_for_network` and `settle`.
+
+By default, this returns `[]`, but you can override it with a list of patterns if your app makes network requests that should not be tracked. For example, you may wish to exclude requests used for analytics using this blacklist.
+
+The regular expressions are interpreted by passing the arguments to `new RegExp` in the browser.
+
+#### `default_ignored_timer_patterns`
+
+An array of regular expressions of the format `[pattern: string, flags?: string]`.
+
+In order to track animations for `settle` and `wait_for_view_activity`, SpecView tracks all timers less than six seconds, and waits until those timers have fired.
+
+In some cases, libraries or your own code may create timers on a persistent basis. This will cause `settle` and `wait_for_view_activity` to time out. You can avoid this by filtering those timers by overriding `default_ignored_timer_patterns` with a list of patterns to ignore.
+
+These patterns are matched against the _stack trace_ from when the timer was created. So for example, if you know that a persistently polling timer is created from a file called `pollForChanges.js`, you might override this method like:
+
+```ruby
+def default_ignored_timer_patterns
+  [["/pollForChanges\\.js"]]
+end
+```
+
+As with `default_ignored_network_patterns`, the elements of the array are passed as arguments to `new RegExp` in the browser.
+
+Note: For performance reasons, this blacklist only applies to timers greater than 500 milliseconds. Shorter timers cannot be ignored with this mechanism.
 
 #### `wait_for_view_activity`
 
